@@ -21,6 +21,18 @@ class LoginForm extends React.Component {
     this.props.loginUser({ email, password });
   }
 
+  renderButton(){
+    if (this.props.loading) {
+      return <Spinner size="large" />
+    }
+
+    return (
+      <Button onPress={this.onButtonPress.bind(this)}>
+        Login
+      </Button>
+    );
+  }
+
   renderError(){
     if (this.props.error) {
       return (
@@ -58,12 +70,7 @@ class LoginForm extends React.Component {
         {this.renderError()}
 
         <CardSection>
-          {this.props.loading ?
-          <Button onPress={this.onButtonPress.bind(this)}>
-            Login
-          </Button> :
-          <Spinner />
-        }
+          {this.renderButton()}
         </CardSection>
       </Card>
     )
@@ -75,7 +82,7 @@ const mapStateToProps = state => {
     email: state.auth.email,
     password: state.auth.password,
     error: state.auth.error,
-    loading: state.auth.error
+    loading: state.auth.loading
   };
 };
 

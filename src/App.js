@@ -9,19 +9,20 @@ import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import LoginForm from './components/LoginForm';
 import { Header } from './components/common';
+import Router form './Router';
 
 
 class App extends Component {
 
   componentWillMount() {
-    const config = {
+    firebase.initializeApp({
       apiKey: "AIzaSyCELBRW4jlzp0ijS7WwuqMybunNLeXXOp0",
       authDomain: "reduxexp.firebaseapp.com",
       databaseURL: "https://reduxexp.firebaseio.com",
       projectId: "reduxexp",
       storageBucket: "reduxexp.appspot.com",
       messagingSenderId: "97670824527"
-    };
+    });
   }
 
   render() {
@@ -29,10 +30,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <View>
-          <Header headerText='Manager!' />
-          <LoginForm />
-        </View>
+        <Router />
       </Provider>
     );
   }
